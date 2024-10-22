@@ -4,16 +4,38 @@ import "./App.css";
 // import { decrement, increment } from './features/counter/counterSlice'
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
+import Home from "./pages/Home";
+import {createBrowserRouter, Outlet} from "react-router-dom"
+import ProtectedRoute from "./components/ProtectedRoute";
+// import { ToastContainer } from "react-toastify";
+
+
+export const router = createBrowserRouter([
+  {
+    path:"/",
+    element:<SignUp/>
+  },
+  {
+    path:"/signin",
+    element:<SignIn/>
+  },
+  {
+    path:"/home",
+    element:(
+      <ProtectedRoute>
+        <Home/>
+      </ProtectedRoute>
+    )
+  },
+])
+
 
 function App() {
-  // const count = useSelector((state) => state.counter.value)
-  // const dispatch = useDispatch()
 
   return (
     <>
-      <div>
-        {/* <SignUp/> */}
-        <SignIn/>
+      <div className="">
+        <Outlet/>
         {/* <div>
           <button
             className="border-2 border-green-800 rounded-md text-white p-3 m-5 font-bold text-2xl bg-green-600"
